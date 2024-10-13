@@ -1,0 +1,6 @@
+@io.quind.kafka.trainning.api_HostAddress = http://localhost:5244
+
+GET {{io.quind.kafka.trainning.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

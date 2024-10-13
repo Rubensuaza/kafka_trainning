@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>638bfea6-27d2-4c3c-99c3-2c346ea53012</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\io.quind.kafka.trainning.kafka\io.quind.kafka.trainning.kafka.csproj" />
+    <ProjectReference Include="..\io.quind.kafka.trainning.repository\io.quind.kafka.trainning.repository.csproj" />
+    <ProjectReference Include="..\io.quind.kafka.trainning.usecase\io.quind.kafka.trainning.usecase.csproj" />
+  </ItemGroup>
+
+</Project>
