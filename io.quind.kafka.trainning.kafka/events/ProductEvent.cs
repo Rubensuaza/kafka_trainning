@@ -1,4 +1,6 @@
-﻿using io.quind.kafka.trainning.kafka.configuration;
+﻿using Confluent.Kafka;
+using io.quind.kafka.trainning.kafka.configuration;
+using io.quind.kafka.trainning.model.exceptions;
 using io.quind.kafka.trainning.model.model;
 using io.quind.kafka.trainning.model.ports.inputs;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,13 +29,22 @@ namespace io.quind.kafka.trainning.kafka.events
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            consumer.ConsumerEvent("products-topic",json=>JsonSerializer.Deserialize<Product>(json))
+            consumer.ConsumerEvent("sales-topic",json=>JsonSerializer.Deserialize<Product>(json))
                 .Subscribe(async product =>
                 {
-                    var productInventory= await OnNextSaleReceived(product);
-                    if (await OnNextSaleValidateStock(productInventory))
+                    try
                     {
-                        producer.ProducerEvent(productInventory, p => p.Id.ToString(), "alert-topic")
+                        var productInventory = await OnNextSaleReceived(product);
+                        if (await OnNextSaleValidateStock(productInventory))
+                        {
+                            producer.ProducerEvent(productInventory, p => p.Id.ToString(), "low_stock-topic")
+                            .Subscribe(message => Console.WriteLine(message),
+                                        error => Console.WriteLine($"Error producer message: {error.Message}"));
+                        }
+                    }
+                    catch (ProductException ex) 
+                    {
+                        producer.ProducerEvent(product, p => p.Id.ToString(),"insufficient_stock-topic")
                         .Subscribe(message => Console.WriteLine(message),
                                     error => Console.WriteLine($"Error producer message: {error.Message}"));
                     }

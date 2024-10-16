@@ -9,6 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "io.quind.kafka.trainning.ap
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "infrastructure", "infrastructure", "{1B7BFFA2-B1C8-47EB-9ACC-EE222462CDDE}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Documents\kafka\docker-compose.yaml = ..\..\..\Documents\kafka\docker-compose.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "domain", "domain", "{A0E17DA1-F771-428D-A568-191B6752BFD0}"
 EndProject
@@ -26,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "io.quind.kafka.trainning.mo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgresql", "postgresql", "{445955CA-AF90-4594-8835-233986863ECE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "io.quind.kafka.trainning.repository", "io.quind.kafka.trainning.repository\io.quind.kafka.trainning.repository.csproj", "{E7E53669-2CCE-4F67-B1FB-6A4AA59B013E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "io.quind.kafka.trainning.repository", "io.quind.kafka.trainning.repository\io.quind.kafka.trainning.repository.csproj", "{E7E53669-2CCE-4F67-B1FB-6A4AA59B013E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "io.quind.kafka.trainning.usecase", "io.quind.kafka.trainning.usecase\io.quind.kafka.trainning.usecase.csproj", "{CF5FC97C-F50B-41E9-AD08-DB04BB29B04F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "io.quind.kafka.trainning.usecase", "io.quind.kafka.trainning.usecase\io.quind.kafka.trainning.usecase.csproj", "{CF5FC97C-F50B-41E9-AD08-DB04BB29B04F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
