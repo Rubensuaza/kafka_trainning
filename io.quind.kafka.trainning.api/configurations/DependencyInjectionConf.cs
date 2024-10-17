@@ -22,7 +22,7 @@ namespace io.quind.kafka.trainning.api.configurations
             services.AddSingleton<KafkaProducer>();
 
 
-            services.AddHostedService<ProductEvent>();
+            services.AddHostedService<SaleHandler>();
         }
     }
 }

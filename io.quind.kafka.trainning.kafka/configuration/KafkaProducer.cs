@@ -1,5 +1,5 @@
 ﻿using Confluent.Kafka;
-using io.quind.kafka.trainning.model.model;
+using Microsoft.Extensions.Logging;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Text.Json;
@@ -11,12 +11,14 @@ namespace io.quind.kafka.trainning.kafka.configuration
         private readonly KafkaConfig config;
         private readonly IProducer<string, string> producer;
         private readonly ISubject<string> subject;
+        private readonly ILogger<KafkaProducer> logger;
 
-        public KafkaProducer(KafkaConfig config)
+        public KafkaProducer(KafkaConfig config, ILogger<KafkaProducer> logger)
         {
             this.config = config;
             this.producer = new ProducerBuilder<string,string>(config.GetProducerConfig()).Build();
             this.subject = new ReplaySubject<string>(1);
+            this.logger = logger;
         }
 
         public IObservable<string> ProducerEvent<T>(T data, Func<T, string> keySelector, string topic)
@@ -37,12 +39,12 @@ namespace io.quind.kafka.trainning.kafka.configuration
                 };
                 var deliveryResult = await producer.ProduceAsync(topic, message);
 
-                Console.WriteLine($"Message send: {deliveryResult.TopicPartitionOffset}");
+                logger.LogInformation($"Message send: {deliveryResult.TopicPartitionOffset}");
                 subject.OnNext($"Message send to {topic} with Id {message.Key}");
             }
             catch (ProduceException<string, string> e)
             {
-                Console.WriteLine($"Error to send message:{e.Error.Reason}");
+                logger.LogError($"Error to send message:{e.Error.Reason}");
                 subject.OnError(e);
             }
         }

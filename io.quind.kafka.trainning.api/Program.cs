@@ -22,6 +22,10 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 #endregion
 
 
+#region log configuration
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+#endregion
 
 // Add services to the container.
 

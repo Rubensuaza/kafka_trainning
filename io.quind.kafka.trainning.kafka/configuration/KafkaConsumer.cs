@@ -1,14 +1,7 @@
 ﻿using Confluent.Kafka;
-using io.quind.kafka.trainning.model.model;
-using io.quind.kafka.trainning.model.ports.outputs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Logging;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace io.quind.kafka.trainning.kafka.configuration
 {
@@ -17,12 +10,14 @@ namespace io.quind.kafka.trainning.kafka.configuration
 
         private readonly KafkaConfig kafkaConfig;
         private readonly ISubject<T> subject;
-        
+        private readonly ILogger<KafkaConsumer<T>> logger;
 
-        public KafkaConsumer(KafkaConfig kafkaConfig, ISubject<T> subject)
+
+        public KafkaConsumer(KafkaConfig kafkaConfig, ISubject<T> subject,ILogger<KafkaConsumer<T>> logger)
         {
             this.kafkaConfig = kafkaConfig;
             this.subject = new ReplaySubject<T>(1);
+            this.logger=logger;
         }
 
         public IObservable<T> ConsumerEvent(string topic, Func<string, T> deserializer)
@@ -48,7 +43,7 @@ namespace io.quind.kafka.trainning.kafka.configuration
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine($"error to deserializer JSON: {ex.Message}");
+                        logger.LogError($"error to deserializer JSON: {ex.Message}");
                     }
 
                     if (data != null)
