@@ -8,10 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 DependencyInjectionConf.DependencyInjectionConfServices(builder.Services);
 #endregion
 
-#region kafka configuration
-//var kafkaConfig = new KafkaConfig();
-//builder.Services.AddSingleton(kafkaConfig);
-#endregion
 
 #region postgresql configuration
 var connectionStrring = builder.Configuration.GetConnectionString("PostgresqlConnection");

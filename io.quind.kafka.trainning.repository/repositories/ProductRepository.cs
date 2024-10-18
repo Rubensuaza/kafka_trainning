@@ -3,11 +3,6 @@ using io.quind.kafka.trainning.model.ports.outputs;
 using io.quind.kafka.trainning.repository.config;
 using io.quind.kafka.trainning.repository.entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace io.quind.kafka.trainning.repository.repositories
 {
